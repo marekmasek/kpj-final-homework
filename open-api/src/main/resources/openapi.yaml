@@ -22,7 +22,7 @@ paths:
         - services
       summary: Returns a registred service by name
       description: Returns a registred service by name
-      operationId: getAllServices
+      operationId: getService
       parameters:
         - name: name
           in: path
@@ -57,7 +57,7 @@ paths:
         - services
       summary: Returns all registered services
       description: Returns all registered services
-      operationId: getAllServices_1
+      operationId: getAllServices
       responses:
         '200':
           description: OK
