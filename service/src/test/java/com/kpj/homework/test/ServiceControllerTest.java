@@ -19,6 +19,7 @@ import java.util.Optional;
 import static com.kpj.homework.util.ServiceEntityUtils.prepareRandomServiceEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -49,9 +50,9 @@ public class ServiceControllerTest extends HomeworkApplicationTests {
 
     @Test
     void test2() {
-        given(serviceMock.find("blabla")).willReturn(Optional.empty());
+        given(serviceMock.find(anyString())).willReturn(Optional.empty());
 
-        ResponseStatusException thrown = assertThrows(ResponseStatusException.class, () -> controller.getService(serviceEntity.getName()));
+        ResponseStatusException thrown = assertThrows(ResponseStatusException.class, () -> controller.getService("blabla"));
 
         assertEquals(NOT_FOUND, thrown.getStatus());
         assertEquals("Service not found", thrown.getReason());
