@@ -47,13 +47,16 @@ public record ServiceServiceImpl(ServiceRepository repository, CurrentService cu
         log.info("Received: " + message);
         ServiceEntity receivedService = mapper.toEntity(message);
 
-        if (serviceExists(receivedService)) {
+        if (shouldRegisterNewService(receivedService)) {
             save(receivedService);
             register();
+            log.info("New service was registered: {}", message);
+        } else {
+            log.info("Received service wasn't registered: {}", message);
         }
     }
 
-    private boolean serviceExists(ServiceEntity service) {
+    private boolean shouldRegisterNewService(ServiceEntity service) {
         return service != null
                 && !getCurrentService().getName().equals(service.getName())
                 && find(service.getName()).isEmpty();

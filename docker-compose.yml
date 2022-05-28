@@ -1,11 +1,13 @@
 version: "3.9"
 services:
   masek-service:
-    container_name: "service"
+    container_name: "masek-service"
     image: "masek-service"
     ports:
-      - "${service_exposed_port}:8080"
+      - "${SERVICE_EXPOSED_PORT}:8080"
     environment:
-      spring_rabbitmq_addresses: ${RABBIT_ADDRESS}
-      service_name: "marekmasek"
-      service_exposed_port: "31161"
+      SPRING_RABBITMQ_ADDRESSES: ${RABBIT_ADDRESS}
+      SERVICE_NAME: ${SERVICE_NAME}
+      SERVICE_EXPOSED_PORT: ${SERVICE_EXPOSED_PORT}
+      RABBITMQ_FANOUT_NAME: ${RABBITMQ_FANOUT_NAME}
+      RABBITMQ_QUEUE_NAME: ${RABBITMQ_QUEUE_NAME}
