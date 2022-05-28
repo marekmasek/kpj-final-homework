@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(OutputCaptureExtension.class)
-public class ServiceMapperTest extends HomeworkApplicationTests {
+public class MapperTest extends HomeworkApplicationTests {
 
     @Autowired
     private ServiceMapper mapper;
 
     @ParameterizedTest
     @ValueSource(strings = {"blabla2555", "blabla;bla"})
-    void invalidMessageToEntityMapperTest(String message, CapturedOutput output) {
+    void invalidMessageToEntityMapper(String message, CapturedOutput output) {
         ServiceEntity service = mapper.toEntity(message);
 
         assertNull(service, "Invalid message wasn't mapped to ServiceEntity=null");
@@ -32,7 +32,7 @@ public class ServiceMapperTest extends HomeworkApplicationTests {
     }
 
     @Test
-    void validMessageToEntityMapperTest() {
+    void validMessageToEntityMapper() {
         String name = "blabla";
         String port = "12345";
         ServiceEntity service = mapper.toEntity(name + ";" + port);

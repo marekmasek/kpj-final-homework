@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  masek-service:
+    container_name: "service"
+    image: "masek-service"
+    ports:
+      - "${service_exposed_port}:8080"
+    environment:
+      spring_rabbitmq_addresses: ${RABBIT_ADDRESS}
+      service_name: "marekmasek"
+      service_exposed_port: "31161"

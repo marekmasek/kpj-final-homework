@@ -47,12 +47,15 @@ public record ServiceServiceImpl(ServiceRepository repository, CurrentService cu
         log.info("Received: " + message);
         ServiceEntity receivedService = mapper.toEntity(message);
 
-        if (receivedService != null
-                && !getCurrentService().getName().equals(receivedService.getName())
-                && find(receivedService.getName()).isEmpty()) {
-
+        if (serviceExists(receivedService)) {
             save(receivedService);
             register();
         }
+    }
+
+    private boolean serviceExists(ServiceEntity service) {
+        return service != null
+                && !getCurrentService().getName().equals(service.getName())
+                && find(service.getName()).isEmpty();
     }
 }
