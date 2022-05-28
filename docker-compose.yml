@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   masek-service:
-    container_name: "masek-service"
     image: "masek-service"
     ports:
       - "${SERVICE_EXPOSED_PORT}:8080"

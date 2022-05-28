@@ -11,6 +11,6 @@ public record MessageSenderImpl(AmqpTemplate rabbitTemplate, FanoutExchange exch
 
     public void send(String message) {
         rabbitTemplate.convertAndSend(exchange.getName(), "", message);
-        log.info("Sent: " + message);
+        log.info("Sent message: " + message);
     }
 }

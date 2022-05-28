@@ -44,15 +44,15 @@ public record ServiceServiceImpl(ServiceRepository repository, CurrentService cu
 
     @Override
     public void onMessage(String message) {
-        log.info("Received: " + message);
+        log.info("Received message: " + message);
         ServiceEntity receivedService = mapper.toEntity(message);
 
         if (shouldRegisterNewService(receivedService)) {
             save(receivedService);
             register();
-            log.info("New service was registered: {}", message);
+            log.info("New service was registered: " + message);
         } else {
-            log.info("Received service wasn't registered: {}", message);
+            log.info("Received service wasn't registered: " + message);
         }
     }
 
